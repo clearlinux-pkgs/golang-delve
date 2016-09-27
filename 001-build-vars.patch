@@ -1,0 +1,35 @@
+diff --git a/Makefile b/Makefile
+index 2108bfa..c6a5a9d 100644
+--- a/Makefile
++++ b/Makefile
+@@ -2,7 +2,15 @@
+ UNAME=$(shell uname)
+ PREFIX=github.com/derekparker/delve
+ GOVERSION=$(shell go version)
+-BUILD_SHA=$(shell git rev-parse HEAD)
++BUILD_SHA="4d8daeb1a884c475b0b63483e3e15727f7af1c90"
++
++top_srcdir = $(abspath .)
++build_dir = $(top_srcdir)/build
++build_bin_dir = $(build_dir)/bin
++pkg_dir = $(top_srcdir)
++
++export GOPATH=$(pkg_dir)
++export GOBIN=$(build_bin_dir)
+ 
+ ifeq "$(UNAME)" "Darwin"
+     BUILD_FLAGS=-ldflags="-s -X main.Build=$(BUILD_SHA)"
+@@ -44,7 +52,12 @@ else
+ endif
+ endif
+ 
+-install: check-cert
++$(top_srcdir)/src/github.com/derekparker/delve/cmd/dlv/main.go:
++	@echo "Preparing source symlink"
++	$(shell mkdir -p $(top_srcdir)/src/github.com/derekparker)
++	$(shell ln -s $(top_srcdir) $(top_srcdir)/src/github.com/derekparker/delve)
++
++install: check-cert $(top_srcdir)/src/github.com/derekparker/delve/cmd/dlv/main.go
+ 	go install $(BUILD_FLAGS) github.com/derekparker/delve/cmd/dlv
+ ifdef DARWIN
+ ifneq "$(GOBIN)" ""
