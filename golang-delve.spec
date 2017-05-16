@@ -4,7 +4,7 @@
 #
 Name     : golang-delve
 Version  : 4d8daeb1a884c475b0b63483e3e15727f7af1c90
-Release  : 1
+Release  : 2
 URL      : https://github.com/derekparker/delve/archive/4d8daeb1a884c475b0b63483e3e15727f7af1c90.tar.gz
 Source0  : https://github.com/derekparker/delve/archive/4d8daeb1a884c475b0b63483e3e15727f7af1c90.tar.gz
 Summary  : No detailed summary available
